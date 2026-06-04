@@ -1,0 +1,87 @@
+<div class="container">
+    <h2>پانێڵی بەڕێوبەرایەتی قوتابخانە</h2>
+    
+    <div class="stats-container">
+        <div class="stat-card present-card">قوتابیانی ئامادە: <span id="today-present-count">0</span></div>
+        <div class="stat-card absent-card">قوتابیانی غایب: <span id="today-absent-count">0</span></div>
+    </div>
+
+    <div class="menu-buttons">
+        <button class="btn-menu" onclick="openModal('register-modal')">➕ تۆمارکردنی قوتابی نوێ</button>
+        <button class="btn-menu" onclick="openModal('reports-modal')">📊 ڕاپۆرتی مانگانە و بەخێوکەران</button>
+    </div>
+
+    <hr>
+
+    <section class="section">
+        <h3>ڕاپۆرتی ڕۆژانە</h3>
+        <div class="lists-wrapper">
+            <div class="list-box">
+                <h4>لیستی ئامادبووان (هاتوو)</h4>
+                <ul id="present-list"></ul>
+            </div>
+            <div class="list-box">
+                <h4>لیستی ئامادەنەبووان (نەهاتوو)</h4>
+                <ul id="absent-list"></ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('register-modal')">&times;</span>
+            <h3>تۆمارکردن و دەستکاریکردنی قوتابی</h3>
+            <form id="student-form">
+                <input type="text" id="card-id" placeholder="ژمارەی کارت (RFID)" required>
+                <input type="text" id="student-name" placeholder="ناوی تەواو" required>
+                <input type="text" id="student-class" placeholder="پۆل" required>
+                
+                <div class="image-section">
+                    <label>وێنەی قوتابی:</label>
+                    <input type="file" id="student-file" accept="image/*">
+                    <video id="webcam" autoplay playsinline style="width:150px; display:none;"></video>
+                    <button type="button" id="btn-capture" onclick="startWebcam()">کردنەوەی کامێرا</button>
+                    <button type="button" id="btn-take-pic" onclick="takeSnapshot()" style="display:none;">گرتنی وێنە</button>
+                    <canvas id="canvas" style="display:none;"></canvas>
+                </div>
+                <button type="submit" class="btn-save">پاشکەوتکردن / نوێکردنەوە</button>
+            </form>
+            
+            <h4>لیستی گشتی قوتابییان بۆ دەستکاریکردن یان سڕینەوە</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>کارت</th>
+                        <th>ناو</th>
+                        <th>پۆل</th>
+                        <th>کردارەکان</th>
+                    </tr>
+                </thead>
+                <tbody id="all-students-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="reports-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('reports-modal')">&times;</span>
+            
+            <h3>ڕاپۆرتی غایباتی مانگانە (تەنها ئەوانەی غایبیان هەیە)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ناو</th>
+                        <th>پۆل</th>
+                        <th>کۆی گشتی غایبات</th>
+                    </tr>
+                </thead>
+                <tbody id="monthly-report-table-body"></tbody>
+            </table>
+
+            <hr>
+
+            <h3>دۆخی جۆینبوونی بەخێوکەران</h3>
+            <ul id="parents-status-list"></ul>
+        </div>
+    </div>
+</div>
